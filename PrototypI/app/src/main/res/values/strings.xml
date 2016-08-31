@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Gestures</string>
+    <string name="title_activity_main">Hello World Immersion</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Menu -->
+    <string name="menu_evaluation">Evaluation</string>
+    <string name="menu_detect_gestures">Gesten erkennen</string>
+</resources>

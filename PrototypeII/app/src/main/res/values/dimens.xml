@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The width of the left column in the two-column layout. -->
+    <dimen name="glass_card_left_column_width">240px</dimen>
+</resources>

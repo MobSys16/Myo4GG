@@ -95,6 +95,7 @@ public class MyoGlassService extends Service {
 
         // Register for DeviceListener callbacks.
         mHub.addListener(mListener);
+        // No locking gesture needed
         mHub.setLockingPolicy(Hub.LockingPolicy.NONE);
         // If there is no connected Myo, try to attach to one.
         if (mHub.getConnectedDevices().isEmpty()) {

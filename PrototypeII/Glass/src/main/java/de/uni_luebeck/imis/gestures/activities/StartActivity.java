@@ -138,8 +138,7 @@ public class StartActivity extends Activity {
         mAudioManager.playSoundEffect(Sounds.DISALLOWED);
 
         Intent intent = new Intent();
-        intent.setClass(this, MyoTestActivity.class);      //TODO: change to DetectGesturesActivity
+        intent.setClass(this, DetectGesturesActivity.class);      //TODO: change to DetectGesturesActivity
         startActivity(intent);
-        finish();
     }
 }

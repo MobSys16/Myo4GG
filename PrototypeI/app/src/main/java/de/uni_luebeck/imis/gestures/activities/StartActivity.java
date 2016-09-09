@@ -138,6 +138,11 @@ public class StartActivity extends Activity {
      * so that the user is not returned to the splash screen when they exit.
      */
     private void startDetectGestures() {
-        mAudioManager.playSoundEffect(Sounds.DISALLOWED);
+        mAudioManager.playSoundEffect(Sounds.TAP);
+
+        Intent intent = new Intent();
+        intent.setClass(this, DetectGesturesActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

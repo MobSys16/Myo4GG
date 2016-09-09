@@ -45,7 +45,7 @@
       <file leaf-file-name="DetectGesturesActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Glass/src/main/java/de/uni_luebeck/imis/gestures/activities/DetectGesturesActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.31598514">
+            <state vertical-scroll-proportion="0.33268103">
               <caret line="32" column="74" selection-start-line="32" selection-start-column="74" selection-end-line="32" selection-end-column="74" />
               <folding>
                 <element signature="e#2708#2709#0" expanded="true" />
@@ -1281,7 +1281,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../../Semester/Bachelorarbeit/Google Glass/Samples" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../PrototypeI" />
     <property name="options.lastSelected" value="reference.settingsdialog.project.gradle" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -1623,8 +1623,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="152" column="25" selection-start-line="152" selection-start-column="25" selection-end-line="152" selection-end-column="25" />
           <folding>
-            <element signature="e#4610#4611#0" expanded="true" />
-            <element signature="e#4661#4662#0" expanded="true" />
+            <element signature="e#4610#4611#0" expanded="false" />
+            <element signature="e#4661#4662#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1718,8 +1718,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="152" column="25" selection-start-line="152" selection-start-column="25" selection-end-line="152" selection-end-column="25" />
           <folding>
-            <element signature="e#4610#4611#0" expanded="true" />
-            <element signature="e#4661#4662#0" expanded="true" />
+            <element signature="e#4610#4611#0" expanded="false" />
+            <element signature="e#4661#4662#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1871,8 +1871,8 @@
         <state vertical-scroll-proportion="5.340149">
           <caret line="206" column="7" selection-start-line="206" selection-start-column="7" selection-end-line="206" selection-end-column="7" />
           <folding>
-            <element signature="e#4610#4611#0" expanded="true" />
-            <element signature="e#4661#4662#0" expanded="true" />
+            <element signature="e#4610#4611#0" expanded="false" />
+            <element signature="e#4661#4662#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1944,7 +1944,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Glass/src/main/java/de/uni_luebeck/imis/gestures/activities/DetectGesturesActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31598514">
+        <state vertical-scroll-proportion="0.33268103">
           <caret line="32" column="74" selection-start-line="32" selection-start-column="74" selection-end-line="32" selection-end-column="74" />
           <folding>
             <element signature="e#2708#2709#0" expanded="true" />

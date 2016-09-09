@@ -30,7 +30,7 @@ import de.uni_luebeck.imis.gestures.myo.MyoGlassService;
  * @since 05.09.2016
  *
  * This activity makes it possible to test gestures of the google glass touch pad and gestures made
- * with myo. The detected gesture will be displayed on the glass display.
+ * with myo. The detected gesture will be displayed on the glass display. 
  *
  */
 public class DetectGesturesActivity extends Activity {
@@ -50,8 +50,10 @@ public class DetectGesturesActivity extends Activity {
     /** Gesture detector used to present the options menu. */
     private GestureDetector mGestureDetector;
 
+    /** MyoGlassService provides connection to myo */
     private MyoGlassService mService;
 
+    /** If connection to MyoGlassService was successful, onServiceConncted will be called */
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -59,9 +61,12 @@ public class DetectGesturesActivity extends Activity {
             mService = binder.getService();
 
             // Let the service know that the activity is showing. Used by the service to trigger
-            // the appropriate foreground or background events.
+            // the appropriate foreground or background events. The DetectGesturesActivity has to
+            // be delivered here to allow the MyoGlassService to send the status of the myo
+            // connection back to the activity.
             mService.setActivityActive(true, DetectGesturesActivity.this);
 
+            // check if myo is already connected
             setMyoStatus(mService.isAttachedToAnyMyo());
         }
 
@@ -71,19 +76,26 @@ public class DetectGesturesActivity extends Activity {
         }
     };
 
+    /** RelativeLayout of instruction view */
     private RelativeLayout mRlInstructions;
+    /** RelativeLayout of gesture not found view */
     private RelativeLayout mRlGestureNotFound;
+    /** RelativeLayout of gesture found view */
     private RelativeLayout mRlGestureFound;
 
+    /** TextView of detected gesture */
     private TextView mTvGesture;
+    /** TextView of related function */
     private TextView mTvFunction;
 
+    /** TextView of myo status */
     private TextView mTvMyoStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // set the layout of the activity
         setContentView(R.layout.detect_gestures);
 
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -94,7 +106,7 @@ public class DetectGesturesActivity extends Activity {
     }
 
     /**
-     * Initialization of view components of the layout
+     * Initialization of view components of the layout.
      */
     private void initComponents() {
         mRlInstructions = (RelativeLayout) findViewById(R.id.detect_gestures_rl_instruction);
@@ -106,9 +118,13 @@ public class DetectGesturesActivity extends Activity {
 
         mTvMyoStatus = (TextView) findViewById(R.id.detect_gestures_tv_myo_status);
 
+        // This is called to make sure the instructions view is displayed first.
         showInstructions();
     }
 
+    /**
+     * Initialization of myo service.
+     */
     private void initMyo() {
         // Bind to the ConnectionService so that we can communicate with it directly.
         Intent intent = new Intent(this, MyoGlassService.class);
@@ -117,10 +133,13 @@ public class DetectGesturesActivity extends Activity {
         // Start the ConnectionService normally so it outlives the activity. This allows it to
         // listen for Myo pose events when the activity isn't running.
         startService(new Intent(this, MyoGlassService.class));
-
-//        mService.setActivityActive(true, this);
     }
 
+    /**
+     * Displayes status of myo in the upper left corner of the layout.
+     *
+     * @param connectedToMyo    true, if myo is connected
+     */
     public void setMyoStatus(boolean connectedToMyo) {
         if (connectedToMyo) {
             mTvMyoStatus.setText(" verbunden");
@@ -160,6 +179,11 @@ public class DetectGesturesActivity extends Activity {
         return mGestureDetector.onMotionEvent(event);
     }
 
+    /**
+     * Called if gesture is detected. Differentiation of gestures is performed here.
+     *
+     * @param gesture       that has been detected.
+     */
     private void gestureDetected(Gesture gesture) {
         switch (gesture) {
             case TAP:
@@ -200,24 +224,39 @@ public class DetectGesturesActivity extends Activity {
         }
     }
 
+    /**
+     * Displayes the instructions view and disables other views.
+     */
     private void showInstructions() {
         mRlInstructions.setVisibility(View.VISIBLE);
         mRlGestureFound.setVisibility(View.GONE);
         mRlGestureNotFound.setVisibility(View.GONE);
     }
 
+    /**
+     * Displayes gesture not found view and disables other views.
+     */
     private void showGestureNotFound() {
         mRlInstructions.setVisibility(View.GONE);
         mRlGestureFound.setVisibility(View.GONE);
         mRlGestureNotFound.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Displayes gesture found view and disables other views. Detected gesture is displayed
+     * and if related function exist it is displayed too.
+     *
+     * @param gesture       that has been detected.
+     * @param function      that is related to gesture. This parameter is optional and can be null.
+     */
     private void showGesture(String gesture, String function) {
         mRlInstructions.setVisibility(View.GONE);
         mRlGestureFound.setVisibility(View.VISIBLE);
         mRlGestureNotFound.setVisibility(View.GONE);
 
+        // set gesture
         mTvGesture.setText(gesture);
+        // set related function, if one exists
         if (function != null) {
             mTvFunction.setText(function);
         } else {

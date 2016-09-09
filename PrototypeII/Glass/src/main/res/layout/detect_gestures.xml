@@ -2,13 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:keepScreenOn="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/detect_gestures_rl_instruction"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,6 +30,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
             android:textSize="20sp" />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -80,13 +82,13 @@
         android:id="@+id/detect_gestures_rl_gesture_found"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="60dp"
             android:layout_centerHorizontal="true"
             android:id="@+id/linearLayout3" >
 
@@ -113,7 +115,7 @@
             android:id="@+id/linearLayout4"
             android:layout_below="@+id/linearLayout3"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:layout_width="90dp"
@@ -137,11 +139,32 @@
             android:layout_height="wrap_content"
             android:text="App beenden"
             android:id="@+id/detect_gestures_tv_function"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:textSize="20sp"
             android:layout_below="@+id/linearLayout4"
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Myo:"
+        android:id="@+id/textView9"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textSize="20sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" nicht verbunden"
+        android:id="@+id/detect_gestures_tv_myo_status"
+        android:layout_toRightOf="@+id/textView9"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/holo_red_dark" />
 
 </RelativeLayout>

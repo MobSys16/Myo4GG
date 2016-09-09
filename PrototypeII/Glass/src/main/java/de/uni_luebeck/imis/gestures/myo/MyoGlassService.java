@@ -5,6 +5,7 @@
 
 package de.uni_luebeck.imis.gestures.myo;
 
+import android.app.Activity;
 import android.app.Instrumentation;
 import android.app.Service;
 import android.content.Intent;
@@ -27,6 +28,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import de.uni_luebeck.imis.gestures.activities.DetectGesturesActivity;
 import de.uni_luebeck.imis.gestures.activities.MyoTestActivity;
 
 //
@@ -41,9 +43,11 @@ public class MyoGlassService extends Service {
 
     private static final String PREF_MAC_ADDRESS = "PREF_MAC_ADDRESS";
 
+    private DetectGesturesActivity mDetectGestureActivity;
+
     private Hub mHub;
     private SharedPreferences mPrefs;
-    private boolean mActivityActive;
+    private boolean mIsActivityActive;
     private MyoListener mListener = new MyoListener();
 
     // Return an interface to use to communicate with the service.
@@ -64,7 +68,13 @@ public class MyoGlassService extends Service {
 
     // Set the active state of the activity.
     public void setActivityActive(boolean active) {
-        mActivityActive = active;
+        mIsActivityActive = active;
+    }
+
+    // Set the active state of the activity.
+    public void setActivityActive(boolean active, DetectGesturesActivity detectGesturesActivity) {
+        mIsActivityActive = active;
+        mDetectGestureActivity = detectGesturesActivity;
     }
 
     // Detach from the currently attached Myo, if any, and attach to a new one.
@@ -77,6 +87,10 @@ public class MyoGlassService extends Service {
 
         // Begin looking for an adjacent Myo to attach to.
         mHub.attachToAdjacentMyo();
+    }
+
+    public boolean isAttachedToAnyMyo() {
+        return !mHub.getConnectedDevices().isEmpty();
     }
 
     @Override
@@ -149,6 +163,27 @@ public class MyoGlassService extends Service {
             // Store the MAC address of the attached Myo so we can automatically attach to it
             // the next time the app starts.
             mPrefs.edit().putString(PREF_MAC_ADDRESS, myo.getMacAddress()).apply();
+
+            // set status of myo in DetectGestureActivity to "connected"
+            if (mDetectGestureActivity != null) {
+                mDetectGestureActivity.setMyoStatus(true);
+            }
+        }
+
+        @Override
+        public void onDetach(Myo myo, long timestamp){
+            // set status of myo in DetectGestureActivity to "not connected"
+            if (mDetectGestureActivity != null) {
+                mDetectGestureActivity.setMyoStatus(false);
+            }
+        }
+
+        @Override
+        public void onDisconnect(Myo myo, long timestamp) {
+            // set status of myo in DetectGestureActivity to "not connected"
+            if (mDetectGestureActivity != null) {
+                mDetectGestureActivity.setMyoStatus(false);
+            }
         }
 
         // onPose() is called whenever a Myo provides a new pose.
@@ -156,7 +191,7 @@ public class MyoGlassService extends Service {
         public void onPose(Myo myo, long timestamp, Pose pose) {
             Log.i(TAG, "pose: " + pose);
 
-            if (!mActivityActive) {
+            if (!mIsActivityActive) {
                 // Post a delayed runnable when the FINGERS_SPREAD pose is detected, and remove it
                 // if the pose is released before the delay ends. This allows triggering actions
                 // only if a pose is held for a certain time.

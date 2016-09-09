@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import com.google.android.glass.media.Sounds;
 import com.google.android.glass.touchpad.Gesture;
 import com.google.android.glass.touchpad.GestureDetector;
+
+import org.w3c.dom.Text;
 
 import de.uni_luebeck.imis.gestures.R;
 import de.uni_luebeck.imis.gestures.myo.MyoGlassService;
@@ -57,7 +60,9 @@ public class DetectGesturesActivity extends Activity {
 
             // Let the service know that the activity is showing. Used by the service to trigger
             // the appropriate foreground or background events.
-            mService.setActivityActive(true);
+            mService.setActivityActive(true, DetectGesturesActivity.this);
+
+            setMyoStatus(mService.isAttachedToAnyMyo());
         }
 
         @Override
@@ -72,6 +77,8 @@ public class DetectGesturesActivity extends Activity {
 
     private TextView mTvGesture;
     private TextView mTvFunction;
+
+    private TextView mTvMyoStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +104,8 @@ public class DetectGesturesActivity extends Activity {
         mTvGesture = (TextView) findViewById(R.id.detect_gestures_tv_gesture);
         mTvFunction = (TextView) findViewById(R.id.detect_gestures_tv_function);
 
+        mTvMyoStatus = (TextView) findViewById(R.id.detect_gestures_tv_myo_status);
+
         showInstructions();
     }
 
@@ -108,6 +117,18 @@ public class DetectGesturesActivity extends Activity {
         // Start the ConnectionService normally so it outlives the activity. This allows it to
         // listen for Myo pose events when the activity isn't running.
         startService(new Intent(this, MyoGlassService.class));
+
+//        mService.setActivityActive(true, this);
+    }
+
+    public void setMyoStatus(boolean connectedToMyo) {
+        if (connectedToMyo) {
+            mTvMyoStatus.setText(" verbunden");
+            mTvMyoStatus.setTextColor(Color.parseColor("#2CAA3B"));
+        } else {
+            mTvMyoStatus.setText(" nicht verbunden");
+            mTvMyoStatus.setTextColor(Color.parseColor("#FF0000"));
+        }
     }
 
     @Override
@@ -121,7 +142,7 @@ public class DetectGesturesActivity extends Activity {
         super.onStart();
 
         if (mService != null) {
-            mService.setActivityActive(true);
+            mService.setActivityActive(true, DetectGesturesActivity.this);
         }
     }
 

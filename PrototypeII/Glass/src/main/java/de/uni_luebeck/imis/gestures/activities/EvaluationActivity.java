@@ -39,7 +39,10 @@ public class EvaluationActivity extends Activity {
     /** Audio manager used to play system sound effects. */
     private AudioManager mAudioManager;
 
-    /** Listener that displays the options menu when the touchpad is tapped. */
+    /** Gesture detector used to present the options menu. */
+    private GestureDetector mGestureDetector;
+
+    /** Listener that listens to gestures */
     private final GestureDetector.BaseListener mBaseListener = new GestureDetector.BaseListener() {
         @Override
         public boolean onGesture(Gesture gesture) {
@@ -48,11 +51,7 @@ public class EvaluationActivity extends Activity {
         }
     };
 
-    /** Gesture detector used to present the options menu. */
-    private GestureDetector mGestureDetector;
-
     private Mode mCurrentMode = Mode.INSTRUCTIONS;
-//    private Gesture mCurrentGesture = Gesture.SWIPE_LEFT;
     private int mNumberOfCurrentView = 0;
     private int mNumberOfCurrentGesture = 0;
 
@@ -113,7 +112,7 @@ public class EvaluationActivity extends Activity {
                 }
                 break;
             case DETECT_TOUCHPAD_GESTURE:
-                if (gesture.equals(Gestures.getGestureByNumber(mNumberOfCurrentGesture))) {
+                if (gesture.equals(Gestures.getGestureByNumber(mNumberOfCurrentGesture, this))) {
                     correctGestureDetected();
                 } else {
                     wrongGestureDetected();
@@ -302,7 +301,7 @@ public class EvaluationActivity extends Activity {
      * the start menu. This is needed, because the menu was closed after choosing the evaluation.
      */
     private void startMenuActivity() {
-        mAudioManager.playSoundEffect(Sounds.TAP);
+        mAudioManager.playSoundEffect(Sounds.DISMISSED);
 
         Intent intent = new Intent();
         intent.setClass(this, StartActivity.class);

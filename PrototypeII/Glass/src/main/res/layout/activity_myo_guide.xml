@@ -15,7 +15,7 @@
             android:id="@+id/imageView"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:src="@drawable/hand_gesture"
+            android:src="@drawable/myo"
             android:scaleType="centerCrop" />
     </RelativeLayout>
 
@@ -28,18 +28,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Langer Tap mit zwei Fingern"
+            android:text="Swype zurück"
             android:id="@+id/myo_guide_tv_gesture"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:textSize="25sp"
-            android:gravity="center" />
+            android:textSize="25sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Führe die selbe Geste nun mit den Händen aus."
+            android:text="Führe eine Wischbewegung von vorne nach hinten durch."
             android:id="@+id/myo_guide_tv_description"
             android:layout_below="@+id/myo_guide_tv_gesture"
             android:layout_centerHorizontal="true"
@@ -47,15 +46,14 @@
             android:textSize="20sp"
             android:gravity="center" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Weiter durch Tappen"
-            android:id="@+id/textView6"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:textSize="15sp" />
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/myo_guide_iv_circle"
+            android:layout_below="@+id/myo_guide_tv_description"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/circle"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
 </RelativeLayout>

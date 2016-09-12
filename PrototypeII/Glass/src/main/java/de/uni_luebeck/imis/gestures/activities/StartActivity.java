@@ -16,6 +16,11 @@ import de.uni_luebeck.imis.gestures.R;
 /**
  * @author Finn Jacobsen
  * @since 30.06.2016.
+ *
+ * This activity will be launched when the application starts. The activity opens an options menu
+ * to navigate to different parts of the application.
+ *
+ * The user can navigate to the evaluation,detect gestures section and myo guide.
  */
 public class StartActivity extends Activity {
     /**
@@ -24,25 +29,8 @@ public class StartActivity extends Activity {
      */
     private final Handler mHandler = new Handler();
 
-//    /** Listener that displays the options menu when the touchpad is tapped. */
-//    private final GestureDetector.BaseListener mBaseListener = new GestureDetector.BaseListener() {
-//        @Override
-//        public boolean onGesture(Gesture gesture) {
-//            if (gesture == Gesture.TAP) {
-//                mAudioManager.playSoundEffect(Sounds.TAP);
-//                openOptionsMenu();
-//                return true;
-//            } else {
-//                return false;
-//            }
-//        }
-//    };
-
     /** Audio manager used to play system sound effects. */
     private AudioManager mAudioManager;
-
-//    /** Gesture detector used to present the options menu. */
-//    private GestureDetector mGestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +39,6 @@ public class StartActivity extends Activity {
         setContentView(R.layout.activity_start);
 
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-//        mGestureDetector = new GestureDetector(this).setBaseListener(mBaseListener);
-
     }
 
     /**
@@ -64,11 +50,6 @@ public class StartActivity extends Activity {
         super.onAttachedToWindow();
         openOptionsMenu();
     }
-
-//    @Override
-//    public boolean onGenericMotionEvent(MotionEvent event) {
-//        return mGestureDetector.onMotionEvent(event);
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -102,7 +83,6 @@ public class StartActivity extends Activity {
                     }
                 });
                 return true;
-
             case R.id.detect_gestures:
                 mHandler.post(new Runnable() {
                     @Override
@@ -111,7 +91,14 @@ public class StartActivity extends Activity {
                     }
                 });
                 return true;
-
+            case R.id.myo_guide:
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        startMyoGuide();
+                    }
+                });
+                return true;
             default:
                 return false;
         }
@@ -126,6 +113,19 @@ public class StartActivity extends Activity {
 
         Intent intent = new Intent();
         intent.setClass(this, EvaluationActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    /**
+     * Starts the main game activity, and finishes this activity so that the user is not returned
+     * to the splash screen when they exit.
+     */
+    private void startMyoGuide() {
+        mAudioManager.playSoundEffect(Sounds.TAP);
+
+        Intent intent = new Intent();
+        intent.setClass(this, MyoGuideActivty.class);
         startActivity(intent);
         finish();
     }

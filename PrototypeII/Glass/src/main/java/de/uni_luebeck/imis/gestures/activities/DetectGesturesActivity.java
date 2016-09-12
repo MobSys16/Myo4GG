@@ -11,15 +11,12 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.glass.media.Sounds;
 import com.google.android.glass.touchpad.Gesture;
 import com.google.android.glass.touchpad.GestureDetector;
-
-import org.w3c.dom.Text;
 
 import de.uni_luebeck.imis.gestures.R;
 import de.uni_luebeck.imis.gestures.myo.MyoGlassService;
@@ -38,7 +35,10 @@ public class DetectGesturesActivity extends Activity {
     /** Audio manager used to play system sound effects. */
     private AudioManager mAudioManager;
 
-    /** Listener that displays the options menu when the touchpad is tapped. */
+    /** Gesture detector used to present the options menu. */
+    private GestureDetector mGestureDetector;
+
+    /** Listener that listens to gestures */
     private final GestureDetector.BaseListener mBaseListener = new GestureDetector.BaseListener() {
         @Override
         public boolean onGesture(Gesture gesture) {
@@ -46,9 +46,6 @@ public class DetectGesturesActivity extends Activity {
             return true;
         }
     };
-
-    /** Gesture detector used to present the options menu. */
-    private GestureDetector mGestureDetector;
 
     /** MyoGlassService provides connection to myo */
     private MyoGlassService mService;
@@ -96,7 +93,7 @@ public class DetectGesturesActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         // set the layout of the activity
-        setContentView(R.layout.detect_gestures);
+        setContentView(R.layout.activity_detect_gestures);
 
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         mGestureDetector = new GestureDetector(this).setBaseListener(mBaseListener);
@@ -269,7 +266,7 @@ public class DetectGesturesActivity extends Activity {
      * the start menu. This is needed, because the menu was closed after choosing the evaluation.
      */
     private void startMenuActivity() {
-        mAudioManager.playSoundEffect(Sounds.DISALLOWED);
+        mAudioManager.playSoundEffect(Sounds.DISMISSED);
 
         Intent intent = new Intent();
         intent.setClass(this, StartActivity.class);

@@ -99,6 +99,14 @@ public class StartActivity extends Activity {
                     }
                 });
                 return true;
+            case R.id.myo_demo:
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        startMyoDemo();
+                    }
+                });
+                return true;
             default:
                 return false;
         }
@@ -112,7 +120,7 @@ public class StartActivity extends Activity {
         mAudioManager.playSoundEffect(Sounds.TAP);
 
         Intent intent = new Intent();
-        intent.setClass(this, EvaluationActivity.class);
+        intent.setClass(this, MyoDemoActivity.class);
         startActivity(intent);
         finish();
     }
@@ -125,7 +133,7 @@ public class StartActivity extends Activity {
         mAudioManager.playSoundEffect(Sounds.TAP);
 
         Intent intent = new Intent();
-        intent.setClass(this, MyoGuideActivty.class);
+        intent.setClass(this, MyoGuideActivity.class);
         startActivity(intent);
         finish();
     }
@@ -138,7 +146,19 @@ public class StartActivity extends Activity {
         mAudioManager.playSoundEffect(Sounds.DISALLOWED);
 
         Intent intent = new Intent();
-        intent.setClass(this, DetectGesturesActivity.class);      //TODO: change to DetectGesturesActivity
+        intent.setClass(this, DetectGesturesActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Starts the switch background activity with preview of samples, and finishes this activity
+     * so that the user is not returned to the splash screen when they exit.
+     */
+    private void startMyoDemo() {
+        mAudioManager.playSoundEffect(Sounds.DISALLOWED);
+
+        Intent intent = new Intent();
+        intent.setClass(this, MyoDemoActivity.class);
         startActivity(intent);
     }
 }

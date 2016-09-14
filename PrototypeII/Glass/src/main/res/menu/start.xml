@@ -10,6 +10,10 @@
         android:icon="@drawable/thalmic"
         android:title="@string/menu_myo_guide" />
     <item
+        android:id="@+id/myo_demo"
+        android:icon="@drawable/demo"
+        android:title="@string/menu_myo_demo" />
+    <item
         android:id="@+id/evaluation"
         android:icon="@drawable/ic_evaluation"
         android:title="@string/menu_evaluation" />

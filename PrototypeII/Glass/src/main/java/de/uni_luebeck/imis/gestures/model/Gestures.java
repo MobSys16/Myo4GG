@@ -1,16 +1,14 @@
 package de.uni_luebeck.imis.gestures.model;
 
 import android.app.Activity;
-import android.content.Context;
 
 import com.google.android.glass.touchpad.Gesture;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import de.uni_luebeck.imis.gestures.activities.EvaluationActivity;
-import de.uni_luebeck.imis.gestures.activities.MyoGuideActivty;
+import de.uni_luebeck.imis.gestures.activities.MyoGuideActivity;
 
 /**
  * This class builds a list of gestures that can be reached from every activity. The list
@@ -59,7 +57,7 @@ public class Gestures {
     public static Gesture getGestureByNumber(int numberOfGesture, Activity activity) {
         if (activity instanceof EvaluationActivity) {
             return mGesturesOfEvaluation.get(numberOfGesture);
-        } else if (activity instanceof MyoGuideActivty) {
+        } else if (activity instanceof MyoGuideActivity) {
             return mGesturesOfMyoGuide.get(numberOfGesture);
         } else {
             return null;

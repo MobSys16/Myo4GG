@@ -188,10 +188,11 @@ public class MyoTestActivity extends Activity {
 
         private void createCards() {
             Card card = new Card(mContext);
-            card.setText("One");
-            if (mShowingFootnotes) {
-                card.setFootnote("Wave right");
-            }
+//            card.setText("One");
+            card.setEmbeddedLayout(R.layout.fragment_myo_test_1);
+//            if (mShowingFootnotes) {
+//                card.setFootnote("Wave right");
+//            }
             mCards.add(card);
 
             card = new Card(mContext);

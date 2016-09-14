@@ -48,7 +48,10 @@
             android:name=".activities.DetectGesturesActivity">
         </activity>
         <activity
-            android:name=".activities.MyoGuideActivty">
+            android:name=".activities.MyoGuideActivity">
+        </activity>
+        <activity
+            android:name=".activities.MyoDemoActivity">
         </activity>
 
         <service android:name="de.uni_luebeck.imis.gestures.myo.MyoGlassService" />

@@ -112,7 +112,7 @@ public class StartActivity extends Activity {
         mAudioManager.playSoundEffect(Sounds.TAP);
 
         Intent intent = new Intent();
-        intent.setClass(this, EvaluationActivity.class);
+        intent.setClass(this, MyoDemoActivity.class);
         startActivity(intent);
         finish();
     }
@@ -125,7 +125,7 @@ public class StartActivity extends Activity {
         mAudioManager.playSoundEffect(Sounds.TAP);
 
         Intent intent = new Intent();
-        intent.setClass(this, MyoGuideActivty.class);
+        intent.setClass(this, MyoGuideActivity.class);
         startActivity(intent);
         finish();
     }

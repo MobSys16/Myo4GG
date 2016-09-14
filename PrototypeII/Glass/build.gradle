@@ -21,4 +21,5 @@ dependencies {
     }
 
     compile 'com.thalmic:myosdk:0.10.0@aar'
+    compile "com.android.support:support-v4:19.0.+"
 }

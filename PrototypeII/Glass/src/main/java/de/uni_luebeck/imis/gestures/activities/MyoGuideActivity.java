@@ -24,7 +24,7 @@ import de.uni_luebeck.imis.gestures.model.Mode;
  *
  * This activity contains a guide to show which myo gestures exist.
  */
-public class MyoGuideActivty extends Activity {
+public class MyoGuideActivity extends Activity {
 
     /** Audio manager used to play system sound effects. */
     private AudioManager mAudioManager;

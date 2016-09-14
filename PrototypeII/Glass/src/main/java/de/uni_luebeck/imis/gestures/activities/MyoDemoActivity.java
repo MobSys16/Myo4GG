@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.support.v4.view.ViewPager;
 import android.view.MotionEvent;
 
+import com.google.android.glass.media.Sounds;
 import com.google.android.glass.touchpad.Gesture;
 import com.google.android.glass.touchpad.GestureDetector;
 
@@ -137,6 +138,21 @@ public class MyoDemoActivity extends Activity {
                 // Otherwise, select the next step.
                 mPager.setCurrentItem(mPager.getCurrentItem() + 1);
             }
+        } else if (gesture.equals(Gesture.SWIPE_DOWN)) {
+            startMenuActivity();
         }
+    }
+
+    /**
+     * This method is called after the last view of the evaluation was displayed to go back to
+     * the start menu. This is needed, because the menu was closed after choosing the evaluation.
+     */
+    private void startMenuActivity() {
+        mAudioManager.playSoundEffect(Sounds.DISMISSED);
+
+        Intent intent = new Intent();
+        intent.setClass(this, StartActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

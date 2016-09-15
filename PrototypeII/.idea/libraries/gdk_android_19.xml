@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="gdk-android-19">
     <CLASSES>
-      <root url="jar://D:/Programme/Installierte Programme/Android SDK/add-ons/addon-google_gdk-google-19/libs/gdk.jar!/" />
+      <root url="jar://$USER_HOME$/Documents/android_sdk/android-sdk-macosx/add-ons/addon-google_gdk-google-19-1/libs/gdk.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
